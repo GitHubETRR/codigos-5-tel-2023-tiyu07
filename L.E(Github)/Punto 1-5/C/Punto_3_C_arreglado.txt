@@ -1,0 +1,135 @@
+/* Escribir un programa que sume dos números complejos en formato rectangular y
+pregunte al final como desea ver el resultado si en polar o rectangular y lo muestre en
+el formato que el usuario quiera */
+
+#include <stdio.h>
+#include <math.h>
+
+#define PI 3.141593
+#define POLAR 1
+#define CART 0
+
+void bienvenida(void);
+float parte_real(void);
+float parte_imaginaria(void);
+float resultado_modulo (float,float);
+float resultado_angulo (float,float);
+void imprime_polar(float, float);
+float suma_de_complejos_reales(float, float);
+float suma_de_complejos_imaginarios(float, float);
+void imprime_cartesiano(float, float);
+char eleccion(void);
+float parte_real_2(void);
+float parte_imaginaria_2(void);
+
+
+
+int main(){
+    float real,imaginario,real_2,imaginario_2, modulo, angulo,modulo_final,angulo_final;
+    char decision;
+    bienvenida();
+    printf("COMPLEJO 1\n");
+    real = parte_real();
+    imaginario = parte_imaginaria();
+    printf("COMPLEJO 2\n");
+    real_2 = parte_real_2();
+    imaginario_2 = parte_imaginaria_2();
+    float real_3 = suma_de_complejos_reales(real, real_2); 
+    float imaginario_3 = suma_de_complejos_imaginarios(imaginario, imaginario_2);
+    decision = eleccion();
+    if (decision == POLAR) {
+        modulo_final=resultado_modulo (real_3,imaginario_3);
+        angulo_final=resultado_angulo (real_3,imaginario_3);
+        imprime_polar (modulo, angulo);
+
+    }else{
+        imprime_cartesiano(real_3,imaginario_3);
+    }
+    
+    return 0;
+}
+
+void bienvenida(void){
+    printf("Bienvenido al programa que suma complejos\n");
+}
+
+float parte_real(void) {
+    float real;
+
+    printf("Inserta la parte real: ");
+    scanf(" %f", &real);
+
+    return real;
+}
+float parte_imaginaria(void) {
+    float imaginaria;
+
+    printf("Inserta la parte imaginaria: ");
+    scanf(" %f", &imaginaria);
+
+    return imaginaria;
+}
+
+float parte_real_2(void) {
+    float real_2;
+
+    printf("Inserta la parte real del complejo 2: ");
+    scanf(" %f", &real_2);
+
+    return real_2;
+}
+float parte_imaginaria_2(void) {
+    float imaginaria_2;
+
+    printf("Inserta la parte imaginaria del complejo 2: ");
+    scanf(" %f", &imaginaria_2);
+
+    return imaginaria_2;
+}
+
+float resultado_modulo (float real,float imaginaria){
+    float modulo = sqrt(pow(real, 2)+pow(imaginaria, 2));
+    return modulo;
+}
+
+float resultado_angulo (float real,float imaginaria){
+    float angulo = atan2(imaginaria, real) * 180 / PI;
+    return angulo;
+}
+
+void imprime_polar(float modulo, float angulo){
+    printf("Estos son los resultados\n");
+    printf("Modulo: %f\n", modulo);
+    printf("Angulo: %f\n", angulo);
+}
+
+
+char eleccion(){
+    char decision;
+
+    printf("Elegi si quieres verlo en cartesiano (0) o en polar (1)\n");
+    scanf("%d", &decision);
+
+    return decision;
+
+}
+
+float suma_de_complejos_reales(float real, float real_2){
+    float real_3;
+
+    real_3 = real + real_2;
+    
+    return real_3;
+}
+
+float suma_de_complejos_imaginarios(float imaginario, float imaginario_2){
+      float imaginario_3;
+
+    imaginario_3 = imaginario + imaginario_2;
+    
+    return imaginario_3;
+}
+ 
+void imprime_cartesiano(float real_3,float imaginario_3){
+    printf(" %f %f ", real_3, imaginario_3);
+}
